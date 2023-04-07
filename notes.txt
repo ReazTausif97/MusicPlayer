@@ -1,6 +1,0 @@
-1. why use object-fit
-2. why use ::before ::after
-3.how did progress bar worked(hover)
-4. why did he ues position relative in pogress are progress bar and postion absolute in progress before
-5. whats the use of user select
-6. whats the use of inherit
