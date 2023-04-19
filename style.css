@@ -1,84 +1,211 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
-*::before, *::after{
+
+*::before,
+*::after {
     padding: 0;
     margin: 0;
 }
-:root{
-    --white:#F0F0F0;
-    --black:#000000;
-    --lightblack:#5E5A5A;
-    --darkwhite:#52D7BF;
-    --lightwhite:#E5E5E5;
-    --lightbshadow:#969696;
-    --darkbshadow:#BCBCBC;
-    --red:#EB5757;
+
+:root {
+    --white: #F0F0F0;
+    --black: #000000;
+    --lightblack: #5E5A5A;
+    --darkwhite: #52D7BF;
+    --lightwhite: #E5E5E5;
+    --darkbshadow:#FAFAFA;
+    --lightbshadow: #969696;
+    --darkbshadow: #BCBCBC;
+    --lightgray:#A8A8A8;
+    --red: #EB5757;
+    --gray:#828282;
 }
-body{
+
+body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-  }
-.wrapper{
-  width: 380px;
-  padding: 25px 30px;
-  overflow: hidden;
-  position: relative;
-  border-radius: 40px;
-  background: var(--black);
-  box-shadow: 0px 6px 15px var(--lightbshadow);
 }
-.wrapper i{
+
+.wrapper {
+    width: 380px;
+    padding: 25px 30px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 40px;
+    background: var(--black);
+    box-shadow: 0px 6px 15px var(--lightbshadow);
+}
+
+.wrapper i {
     cursor: pointer;
     color: var(--white);
 }
-.top-bar{
+
+.top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.top-bar span{
+
+.top-bar span {
     font-weight: 600;
     font-size: 18px;
     color: var(--white);
 }
-.img-area{
-    margin-top: 25px; 
-    height: 256px;  
+
+.img-area {
+    margin-top: 25px;
+    height: 256px;
 }
-.img-area img{
+
+.img-area img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius:  25px; 
+    border-radius: 25px;
 }
-.song-details{
-    margin-top: 15px;
+
+.song-details {
+    margin-top: 10px;
     margin-left: 10px;
 }
-.song-details p{
+
+.song-details p {
     color: var(--darkbshadow);
     font-size: 16px;
+
 }
-.song-details p:first-child{
+
+.song-details p:first-child {
     font-size: 26px;
     font-weight: 600;
     color: var(--lightwhite);
 }
-.progress-area{
-    margin-top: 25px;
+
+.progress-area {
+    margin-top: 15px;
     height: 5px;
+    cursor: pointer;
     border-radius: 50px;
     background: var(--lightblack);
 }
-.progress-bar{
-    
+
+.progress-bar {
+    height: 100%;
+    width: 50%;
+    border-radius: inherit;
+    position: relative;
+
+    background: var(--darkwhite)
+}
+
+.progress-bar::after {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    top: 50%;
+    right: -5px;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.progress-area:hover .progress-bar::after {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.progress-area .song-duration {
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.song-list {
+    margin-top:30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.song-list .music-list {
+    background: #ffffff13;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.music-list  i,.favorites i{
+    color: var(--gray);
+}
+.favorites:hover i {
+    color: var(--red);
+}
+
+.controls {
+    margin: 30px 3px 5px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controls i {
+    font-size: 28px;
+}
+
+#prev,
+#next {
+    background: #96969631;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+
+}
+#prev{
+    margin-right: -13px;
+}
+#next{
+    margin-left: -13px;
+}
+#repeat,#shuffle{
+    color: var(--lightgray);
+font-size: 25px;
+}
+.play-pause{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--white);
+    cursor: pointer;
+}  
+.play-pause i{
+   color: var(--black);
 }
 
 
