@@ -6,7 +6,7 @@ let allMusic = [
       src: "music-1"
     },
     {
-      name: "Ikson Anywhere – Ikson",
+      name: "Ikson Anywhere - Ikson",
       artist: "Audio Library",
       img: "music-2",
       src: "music-2"

@@ -164,6 +164,7 @@ body {
 
 .controls i {
     font-size: 28px;
+    user-select: none;
 }
 
 #prev,
@@ -205,6 +206,7 @@ body {
 .play-pause i {
     color: var(--black);
     position: absolute;
+    user-select: none;
 }
 
 .music-list {
