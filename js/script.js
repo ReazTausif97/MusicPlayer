@@ -1,7 +1,7 @@
 const wrapper=document.querySelector(".wrapper"),
 myImg=wrapper.querySelector(".img-area .img"),
 songName=wrapper.querySelector(".song-details .name"),
-songArtist=wrapper.querySelector(".song-details .artist");
+songArtist=wrapper.querySelector(".song-details .artist"),
 favorites=wrapper.querySelector(".plist .favorites"),
 pList=wrapper.querySelector(".plist .music-queue"),
 progressArea=wrapper.querySelector(".progress-area"),
@@ -15,12 +15,12 @@ prev=wrapper.querySelector("#prev"),
 next=wrapper.querySelector("#next"),
 playPauseBtn=wrapper.querySelector(".play-pause"),
 repeat=wrapper.querySelector("#repeat"),
-musicList=wrapper.querySelector(".music-list");
+musicList=wrapper.querySelector(".music-list"),
 closeBtn=wrapper.querySelector(".headings #close"),
 ul=wrapper.querySelector("ul"),
 audDur=wrapper.querySelector(".row .audio-duration");
 
-let musicIndex=4;
+let musicIndex=3;
 window.addEventListener("load", ()=>{
     loadMusic(musicIndex); 
   });
@@ -53,8 +53,40 @@ function playPause()
 playPauseBtn.addEventListener("click",()=>{
   playPause();
 });
+function shuffleSong()
+{
+  if(shuffle.classList.contains("shuffled"))
+  {
+    shuffle.classList.remove("shuffled");
+    shuffle.style.color =`var(--white)`;
+  }
+  else
+  {
+    shuffle.classList.add("shuffled");
+    shuffle.style.color =`var(--lightgray)`;
+    
+    shuffle.innerText="shuffle";
+  }
+}
+
+
+function repeatSong()
+{
+  if(repeat.classList.contains("repeat_one"))
+  {
+    repeat.classList.remove("repeat_one");
+  repeat.innerText="repeat_one";
+  repeat.style.color="var(--white)";
+}
+else
+{
+  repeat.classList.add("repeat_one");
+  repeat.innerText="repeat";
+  repeat.style.color="var(--lightgray)";
+}
+}
 mainAudio.addEventListener("timeupdate",()=>{
- 
+  progressBar.style.width=`${(mainAudio.currentTime*100)/mainAudio.duration}%`;
   if(Math.floor(mainAudio.currentTime%60)<10)
   {
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:0${Math.floor(mainAudio.currentTime%60)}`;
@@ -63,10 +95,14 @@ mainAudio.addEventListener("timeupdate",()=>{
   {
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:${Math.floor(mainAudio.currentTime%60)}`;
   }
-
-
-
 });
+shuffle.addEventListener("click", ()=>{
+  shuffleSong();
+});
+repeat.addEventListener("click",()=>{
+repeatSong();
+});
+
 
 
 

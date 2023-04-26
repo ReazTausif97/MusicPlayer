@@ -100,7 +100,7 @@ body {
 
 .progress-bar {
     height: 100%;
-    width: 50%;
+    width: 0%;
     border-radius: inherit;
     position: relative;
 
