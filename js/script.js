@@ -58,14 +58,16 @@ function shuffleSong()
   {
     shuffle.classList.add("shuffled");
     shuffle.style.color =`var(--lightgray)`;
-    
     shuffle.innerText="shuffle";
   }
-  function repeatSong()
+}
+
+
+function repeatSong()
+{
+  if(repeat.classList.contains("repeat_one"))
   {
-    if(repeat.classList.contains("repeat_one"))
-    {
-      repeat.classList.remove("repeat_one");
+    repeat.classList.remove("repeat_one");
     repeat.innerText="repeat_one";
     repeat.style.color="var(--white)";
   }
@@ -75,8 +77,8 @@ function shuffleSong()
     repeat.innerText="repeat";
     repeat.style.color="var(--lightgray)";
   }
-  }
 }
+
 mainAudio.addEventListener("timeupdate",()=>{
   progressBar.style.width=`${(mainAudio.currentTime*100)/mainAudio.duration}%`;
   if(Math.floor(mainAudio.currentTime%60)<10)
@@ -88,6 +90,17 @@ mainAudio.addEventListener("timeupdate",()=>{
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:${Math.floor(mainAudio.currentTime%60)}`;
   }
 });
+progressArea.addEventListener("click",(e)=>{
+  let y = (e.offsetX*100)/progressArea.offsetWidth;
+  mainAudio.currentTime=(y*mainAudio.duration)/100;
+  
+});
+pList.addEventListener("click", ()=>{
+  musicList.classList.toggle("show");
+});
+closeBtn.addEventListener("click", ()=>{
+  musicList.classList.toggle("show");
+});
 playPauseBtn.addEventListener("click",()=>{
   playPause();
 });
@@ -95,7 +108,7 @@ shuffle.addEventListener("click", ()=>{
   shuffleSong();
 });
 repeat.addEventListener("click",()=>{
-repeatSong();
+  repeatSong();
 });
 
 
