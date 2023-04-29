@@ -20,7 +20,7 @@ closeBtn=wrapper.querySelector(".headings #close"),
 ul=wrapper.querySelector("ul"),
 audDur=wrapper.querySelector(".row .audio-duration");
 
-let musicIndex=3;
+let musicIndex=6;
 window.addEventListener("load", ()=>{
     loadMusic(musicIndex); 
   });
@@ -30,6 +30,9 @@ function loadMusic(indxNum)
   songArtist.innerText=allMusic[indxNum - 1].artist;
   myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src=`songs/${allMusic[indxNum-1].src}.mp3`;
+
+
+
 }
 
 function playPause()
@@ -78,9 +81,20 @@ function repeatSong()
     repeat.style.color="var(--lightgray)";
   }
 }
+mainAudio.addEventListener("loadeddata",()=>{
+ if(Math.floor(mainAudio.duration%60)<10)
+  {
+    endTime.innerText=`${Math.floor(mainAudio.duration/60)}:0${Math.floor(mainAudio.duration%60)}`;
+  }
+  else
+  { 
+    endTime.innerText=`${Math.floor(mainAudio.duration/60)}:${Math.floor(mainAudio.duration%60)}`;
+  }
+});
 
 mainAudio.addEventListener("timeupdate",()=>{
   progressBar.style.width=`${(mainAudio.currentTime*100)/mainAudio.duration}%`;
+  console.log(mainAudio.duration+" "+typeof mainAudio.duration);
   if(Math.floor(mainAudio.currentTime%60)<10)
   {
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:0${Math.floor(mainAudio.currentTime%60)}`;
