@@ -31,10 +31,7 @@ function loadMusic(indxNum)
   myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src=`songs/${allMusic[indxNum-1].src}.mp3`;
 }
-function playMusic()
-{
-  mainAudio.play();
-}
+
 function playPause()
 {
   if(playPauseBtn.classList.contains('pause'))
@@ -50,9 +47,6 @@ function playPause()
     playPauseBtn.querySelector('i').innerText="pause";  
   }
 }
-playPauseBtn.addEventListener("click",()=>{
-  playPause();
-});
 function shuffleSong()
 {
   if(shuffle.classList.contains("shuffled"))
@@ -64,7 +58,6 @@ function shuffleSong()
   {
     shuffle.classList.add("shuffled");
     shuffle.style.color =`var(--lightgray)`;
-    
     shuffle.innerText="shuffle";
   }
 }
@@ -75,16 +68,17 @@ function repeatSong()
   if(repeat.classList.contains("repeat_one"))
   {
     repeat.classList.remove("repeat_one");
-  repeat.innerText="repeat_one";
-  repeat.style.color="var(--white)";
+    repeat.innerText="repeat_one";
+    repeat.style.color="var(--white)";
+  }
+  else
+  {
+    repeat.classList.add("repeat_one");
+    repeat.innerText="repeat";
+    repeat.style.color="var(--lightgray)";
+  }
 }
-else
-{
-  repeat.classList.add("repeat_one");
-  repeat.innerText="repeat";
-  repeat.style.color="var(--lightgray)";
-}
-}
+
 mainAudio.addEventListener("timeupdate",()=>{
   progressBar.style.width=`${(mainAudio.currentTime*100)/mainAudio.duration}%`;
   if(Math.floor(mainAudio.currentTime%60)<10)
@@ -96,12 +90,27 @@ mainAudio.addEventListener("timeupdate",()=>{
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:${Math.floor(mainAudio.currentTime%60)}`;
   }
 });
+progressArea.addEventListener("click",(e)=>{
+  let y = (e.offsetX*100)/progressArea.offsetWidth;
+  mainAudio.currentTime=(y*mainAudio.duration)/100;
+  
+});
+pList.addEventListener("click", ()=>{
+  musicList.classList.toggle("show");
+});
+closeBtn.addEventListener("click", ()=>{
+  musicList.classList.toggle("show");
+});
+playPauseBtn.addEventListener("click",()=>{
+  playPause();
+});
 shuffle.addEventListener("click", ()=>{
   shuffleSong();
 });
 repeat.addEventListener("click",()=>{
-repeatSong();
+  repeatSong();
 });
+
 
 
 
