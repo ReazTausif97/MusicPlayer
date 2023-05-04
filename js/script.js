@@ -20,7 +20,7 @@ closeBtn=wrapper.querySelector(".headings #close"),
 ul=wrapper.querySelector("ul"),
 audDur=wrapper.querySelector(".row .audio-duration");
 
-let musicIndex=6;
+let musicIndex=2;
 window.addEventListener("load", ()=>{
     loadMusic(musicIndex); 
   });
@@ -30,11 +30,10 @@ function loadMusic(indxNum)
   songArtist.innerText=allMusic[indxNum - 1].artist;
   myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src=`songs/${allMusic[indxNum-1].src}.mp3`;
-
-
-
 }
 
+
+// Play/Pause Song
 function playPause()
 {
   if(playPauseBtn.classList.contains('pause'))
@@ -50,6 +49,9 @@ function playPause()
     playPauseBtn.querySelector('i').innerText="pause";  
   }
 }
+
+
+
 function shuffleSong()
 {
   if(shuffle.classList.contains("shuffled"))
@@ -65,7 +67,7 @@ function shuffleSong()
   }
 }
 
-
+// Repeat Song
 function repeatSong()
 {
   if(repeat.classList.contains("repeat_one"))
@@ -81,6 +83,8 @@ function repeatSong()
     repeat.style.color="var(--lightgray)";
   }
 }
+
+// Song Duration
 mainAudio.addEventListener("loadeddata",()=>{
  if(Math.floor(mainAudio.duration%60)<10)
   {
@@ -91,7 +95,7 @@ mainAudio.addEventListener("loadeddata",()=>{
     endTime.innerText=`${Math.floor(mainAudio.duration/60)}:${Math.floor(mainAudio.duration%60)}`;
   }
 });
-
+// Progress Bar Update Funtionality
 mainAudio.addEventListener("timeupdate",()=>{
   progressBar.style.width=`${(mainAudio.currentTime*100)/mainAudio.duration}%`;
   console.log(mainAudio.duration+" "+typeof mainAudio.duration);
@@ -104,17 +108,69 @@ mainAudio.addEventListener("timeupdate",()=>{
     curTime.innerText=`${Math.floor(mainAudio.currentTime/60)}:${Math.floor(mainAudio.currentTime%60)}`;
   }
 });
+
+// Seek Funtionality
 progressArea.addEventListener("click",(e)=>{
   let y = (e.offsetX*100)/progressArea.offsetWidth;
   mainAudio.currentTime=(y*mainAudio.duration)/100;
-  
 });
+
+//Next Music
+next.addEventListener("click", ()=>{
+  if(musicIndex<allMusic.length)
+  {
+    musicIndex++;
+  }
+  else
+  {
+    musicIndex=1;
+  }
+  if(playPauseBtn.classList.contains("pause"))
+  {
+    playPauseBtn.classList.remove("pause");
+  }
+  else
+  {
+    playPauseBtn.classList.add("pause");
+  }
+  loadMusic(musicIndex);
+  progressBar.style.width="0%";
+  playPause();
+});
+
+
+//Prev Music
+prev.addEventListener("click", ()=>{
+  if(musicIndex>1)
+  {
+    musicIndex--;
+  }
+  else
+  {
+    musicIndex=allMusic.length;
+  }
+  if(playPauseBtn.classList.contains("pause"))
+  {
+    playPauseBtn.classList.remove("pause");
+  }
+  else
+  {
+    playPauseBtn.classList.add("pause");
+  }
+  loadMusic(musicIndex);  
+  progressBar.style.width="0%";
+  playPause();
+});
+
+// PlayList Display
 pList.addEventListener("click", ()=>{
   musicList.classList.toggle("show");
 });
+// PlayList Close
 closeBtn.addEventListener("click", ()=>{
   musicList.classList.toggle("show");
 });
+
 playPauseBtn.addEventListener("click",()=>{
   playPause();
 });
