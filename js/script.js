@@ -19,7 +19,7 @@ musicList=wrapper.querySelector(".music-list"),
 closeBtn=wrapper.querySelector(".headings #close"),
 ul=wrapper.querySelector("ul"),
 audDur=wrapper.querySelector(".row .audio-duration");
-
+let musicDur;
 let musicIndex=2;
 window.addEventListener("load", ()=>{
     loadMusic(musicIndex); 
@@ -30,9 +30,20 @@ function loadMusic(indxNum)
   songArtist.innerText=allMusic[indxNum - 1].artist;
   myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src=`songs/${allMusic[indxNum-1].src}.mp3`;
+  loadMusicList();
 }
 
+function loadMusicList(){
+  let l = allMusic.length;
+  let str="";
+  for(let i=0;i<l;i++)
+  {
+    str=`<li><div class="row"><span>${allMusic[i].name}</span><p>${allMusic[i].artist}</p>
+    </div><span id="" class="audio-duration">${endTime.innerText}</span></li>`;
+    ul.innerHTML+=str;
+  }
 
+}
 // Play/Pause Song
 function playPause()
 {
