@@ -25,6 +25,7 @@
     --lightgray: #A8A8A8;
     --red: #EB5757;
     --gray: #828282;
+    --lemongreen:#00FF47;
 }
 
 body {
@@ -32,6 +33,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    background: #000000;
 }
 
 .wrapper {
@@ -40,7 +42,7 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 40px;
-    background: var(--black);
+    background-image: linear-gradient(#2E517C, #474A6D, #3D0000);
     box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
@@ -49,7 +51,7 @@ body {
     color: var(--white);
 }
 
-.top-bar,.plist,.progress-area .song-duration,.controls,.headings{
+.top-bar,.plist, .song-duration,.controls,.headings{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,7 +81,7 @@ body {
 }
 
 .song-details p {
-    color: var(--darkbshadow);
+    color: var(--lemongreen);
     font-size: 16px;
 
 }
@@ -87,7 +89,7 @@ body {
 .song-details p:first-child {
     font-size: 26px;
     font-weight: 600;
-    color: var(--lightwhite);
+    color: var(--lemongreen);
 }
 
 .progress-area {
@@ -103,8 +105,7 @@ body {
     width: 0%;
     border-radius: inherit;
     position: relative;
-
-    background: var(--darkwhite)
+    background: var(--lemongreen)
 }
 
 .progress-bar::before {
@@ -127,7 +128,7 @@ body {
     pointer-events: auto;
 }
 
-.progress-area .song-duration {
+.song-duration {
     color: var(--white);
     font-size: 14px;
     margin-top: 2px;
@@ -154,7 +155,7 @@ body {
 }
 
 .favorites:hover i {
-    color: var(--red);
+    color: var(--lemongreen);
 }
 
 .controls {
@@ -199,19 +200,19 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--white);
+    background: var(--lemongreen);
     cursor: pointer;
 }
 
 .play-pause i {
-    color: var(--black);
+    color: var(--white);
     position: absolute;
     user-select: none;
 }
 
 .music-list {
     position: absolute;
-    background: var(--black);
+    background: linear-gradient(#2E517C, #474A6D, #3D0000);
     width: 100%;
     border-radius: 40px;
     padding: 15px 30px;

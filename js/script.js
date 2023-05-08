@@ -30,20 +30,39 @@ function loadMusic(indxNum)
   songArtist.innerText=allMusic[indxNum - 1].artist;
   myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src=`songs/${allMusic[indxNum-1].src}.mp3`;
-  loadMusicList();
 }
 
-function loadMusicList(){
-  let l = allMusic.length;
-  let str="";
-  for(let i=0;i<l;i++)
-  {
-    str=`<li><div class="row"><span>${allMusic[i].name}</span><p>${allMusic[i].artist}</p>
-    </div><span id="" class="audio-duration">${endTime.innerText}</span></li>`;
-    ul.innerHTML+=str;
-  }
+
+let l = allMusic.length;
+for(let i=0;i<l;i++)
+{
+ let LI=document.createElement('li');
+ LI.innerHTML=`<div class="row">
+ <span>${allMusic[i].name}</span>
+ <p>${allMusic[i].artist}</p>
+ </div>
+ <span id="${allMusic[i].src}">0:00</span>
+ <audio class="${allMusic[i].src}" src="songs/${allMusic[i].src}.mp3" ></audio>`;
+
+ ul.append(LI);
+ let x = ul.querySelector(`#${allMusic[i].src}`);
+ let y=ul.querySelector(`.${allMusic[i].src}`);
+ y.addEventListener("loadeddata",()=>{
+   let r=Math.floor(y.duration/60),t=Math.floor(y.duration%60);
+   console.log(r,t);
+   if(t<10)
+   {
+     x.innerHTML=`${r}:0${t}`;
+   }
+   else
+   {
+    x.innerHTML=`${r}:${t}`;
+   }
+  });
 
 }
+
+
 // Play/Pause Song
 function playPause()
 {
@@ -68,7 +87,7 @@ function shuffleSong()
   if(shuffle.classList.contains("shuffled"))
   {
     shuffle.classList.remove("shuffled");
-    shuffle.style.color =`var(--white)`;
+    shuffle.style.color =`var(--lemongreen)`;
   }
   else
   {
@@ -83,13 +102,13 @@ function repeatSong()
 {
   if(repeat.classList.contains("repeat_one"))
   {
-    repeat.classList.remove("repeat_one");
+    repeat.classList.toggle("repeat_one");
     repeat.innerText="repeat_one";
-    repeat.style.color="var(--white)";
+    repeat.style.color="var(--lemongreen)";
   }
   else
-  {
-    repeat.classList.add("repeat_one");
+  { 
+    repeat.classList.toggle("repeat_one");
     repeat.innerText="repeat";
     repeat.style.color="var(--lightgray)";
   }
@@ -172,7 +191,46 @@ prev.addEventListener("click", ()=>{
   progressBar.style.width="0%";
   playPause();
 });
-
+mainAudio.addEventListener("ended",()=>{
+  if(repeat.classList.contains("repeat_one"))
+  {
+  if(playPauseBtn.classList.contains("pause"))
+    {
+      playPauseBtn.classList.remove("pause");
+    }
+    else
+    {
+      playPauseBtn.classList.add("pause");
+    }
+    loadMusic(musicIndex);
+    progressBar.style.width="0%";
+    playPause();
+  }
+  else
+  {if(musicIndex<allMusic.length)
+  {
+    musicIndex++;
+  }
+  else
+  {
+    musicIndex=1;
+  }
+  
+  if(playPauseBtn.classList.contains("pause"))
+  {
+    playPauseBtn.classList.remove("pause");
+  }
+  else
+  {
+    playPauseBtn.classList.add("pause");
+  }
+  loadMusic(musicIndex);
+  progressBar.style.width="0%";
+  playPause();
+    
+  }
+  
+});
 // PlayList Display
 pList.addEventListener("click", ()=>{
   musicList.classList.toggle("show");
@@ -191,7 +249,6 @@ shuffle.addEventListener("click", ()=>{
 repeat.addEventListener("click",()=>{
   repeatSong();
 });
-
 
 
 
