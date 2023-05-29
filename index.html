@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/34eb3bc25a.js" crossorigin="anonymous"></script>
 
-   
+
 </head>
 
 <body>
@@ -18,12 +18,26 @@
         <div class="top-bar">
             <i class="fa-solid fa-chevron-down"></i>
             <span>Now Playing</span>
-            <i class="fa-solid fa-volume-high"></i>
+            <i id="volumeBtn" class="fa-solid fa-volume-high"></i>
         </div>
         <div class="img-area">
-            <img class="img" src="images/music-1.jpg" alt="">
-        </div>
-        <div class="volume">
+            <div class="volume-area">
+                <div class="volume-bar">
+          
+                <div id="l1">
+                    <div id="l2">
+                        <div id="l3">
+
+                        </div>
+                    </div>
+                </div>     
+             </div>
+            </div>
+
+            <!-- <img class="img" src="images/music-1.jpg" alt=""> -->
+            <!-- <div class="volume">
+                
+            </div> -->
         </div>
         <div class="song-details">
             <p class="name"></p>
@@ -44,8 +58,8 @@
         </div>
 
         <div class="song-duration">
-                <span class="current-time">0:00</span>
-                <span class="end-time">0:00</span>
+            <span class="current-time">0:00</span>
+            <span class="end-time">0:00</span>
         </div>
         <div class="controls">
             <i id="shuffle" class="material-icons">shuffle</i>
@@ -69,7 +83,7 @@
                 <i id="close" class="material-icons">close</i>
             </div>
             <ul>
-                
+
             </ul>
 
         </div>
