@@ -19,8 +19,6 @@ const wrapper = document.querySelector(".wrapper"),
   closeBtn = wrapper.querySelector(".headings #close"),
   ul = wrapper.querySelector("ul"),
   vol = wrapper.querySelector(".volume"),
-  volumeBtn = wrapper.querySelector("#volumeBtn"),
-  volumeArea = wrapper.querySelector(".volume-area"),
   volumeBar = wrapper.querySelector(".volume-bar"),
   layer1 = document.getElementById("l1"),
   layer2 = document.getElementById("l2"),
@@ -32,20 +30,58 @@ window.addEventListener("load", () => {
   loadMusic(musicIndex);
 });
 
-let check = false;
-setInterval(() => {
-  if (!check) {
-    layer1.style.transform = "rotate(45deg)";
-    layer2.style.transform = "rotate(90deg)";
-    layer3.style.transform = "rotate(90deg)";
-  }
-  else {
-    layer1.style.transform = "rotate(0deg)";
-    layer2.style.transform = "rotate(0deg)";
-    layer3.style.transform = "rotate(0deg)";
-  }
-  check = !check;
-}, 2000);
+
+let check = true;
+let x = () => {
+    setInterval(() => {
+        y();
+    }, 2000);
+
+}
+let y = async () => {
+
+    if (check) {
+      layer1.style.transform ="rotate(-45deg)";
+      layer2.style.transform ="rotate(-45deg)";
+      layer3.style.transform ="rotate(-45deg)";
+        setTimeout(async () => {
+          layer1.style.transform ="rotate(0deg)";
+            layer2.style.transform ="rotate(0deg)";
+            layer3.style.transform ="rotate(0deg)";
+            layer1.style.transform ="rotate(45deg)";
+            layer2.style.transform ="rotate(45deg)";
+            layer3.style.transform ="rotate(45deg)";
+        }, 800);
+
+
+        // div2.classList.add("rotate-45");
+        // div3.classList.add("rotate-45");
+    }
+    else {
+      layer1.style.transform ="rotate(0deg)";
+      layer2.style.transform ="rotate(0deg)";
+      layer3.style.transform ="rotate(0deg)";
+    }
+    check = !check;
+};
+x();
+
+
+
+// let check = false;
+// setInterval(() => {
+//   if (!check) {
+//     layer1.style.transform = "rotate(45deg)";
+//     layer2.style.transform = "rotate(90deg)";
+//     layer3.style.transform = "rotate(90deg)";
+//   }
+//   else {
+//     layer1.style.transform = "rotate(0deg)";
+//     layer2.style.transform = "rotate(0deg)";
+//     layer3.style.transform = "rotate(0deg)";
+//   }
+//   check = !check;
+// }, 2000);
 
 function loadMusic(indxNum) {
   songName.innerText = allMusic[indxNum - 1].name;
@@ -117,12 +153,8 @@ progressArea.addEventListener("click", (e) => {
   mainAudio.currentTime = (y * mainAudio.duration) / 100;
 });
 
-volumeArea.addEventListener("click", (e) => {
-  // let y = (e.offsetY * 100) / volumeArea.offsetWidth;
-  const yFromBottom = (e.offsetY) / volumeArea.offsetHeight;
-  mainAudio.volume = yFromBottom;
-  volumeBar.style.height = `${yFromBottom * 100}%`;
-});
+
+
 
 next.addEventListener("click", () => {
   let x = ul.querySelector(`#${allMusic[musicIndex - 1].src}`);
@@ -188,8 +220,27 @@ prev.addEventListener("click", () => {
 
 });
 
-volumeBtn.addEventListener("click", () => {
-  vol.classList.toggle("volumeshow");
+volumeBar.addEventListener("click", (e) => {
+  const circleRect = volumeBar.getBoundingClientRect();
+    const circleCenterX = circleRect.left + circleRect.width / 2;
+    const circleCenterY = circleRect.top + circleRect.height / 2;
+  
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+  
+    const offsetX = clickX - circleCenterX;
+    const offsetY = clickY - circleCenterY;
+  
+    const angleRad = Math.atan2(offsetY, offsetX);
+    let angleDeg = angleRad * (180 / Math.PI);
+    angleDeg = (angleDeg + 360) % 360;
+    angleDeg+=90;
+    angleDeg=angleDeg % 360;
+    volumeBar.style.background = `conic-gradient(var(--lemongreen) ${angleDeg}deg, var(--lightblack) 0deg)`;
+    angleDeg/=360;
+    mainAudio.volume=angleDeg;
+    console.log(angleDeg);
+
 });
 
 // PlayList Display
