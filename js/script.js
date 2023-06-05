@@ -34,7 +34,17 @@ window.addEventListener("load", () => {
 let check = true;
 let x = () => {
     setInterval(() => {
+      if(mainAudio.paused)
+      {
+        layer1.style.transform ="rotate(0deg)";
+        layer2.style.transform ="rotate(0deg)";
+        layer3.style.transform ="rotate(0deg)";
+      }
+      else
+      {
         y();
+      }
+        
     }, 2000);
 
 }
@@ -46,11 +56,11 @@ let y = async () => {
       layer3.style.transform ="rotate(-45deg)";
         setTimeout(async () => {
           layer1.style.transform ="rotate(0deg)";
-            layer2.style.transform ="rotate(0deg)";
-            layer3.style.transform ="rotate(0deg)";
-            layer1.style.transform ="rotate(45deg)";
-            layer2.style.transform ="rotate(45deg)";
-            layer3.style.transform ="rotate(45deg)";
+          layer2.style.transform ="rotate(0deg)";
+          layer3.style.transform ="rotate(0deg)";
+          layer1.style.transform ="rotate(45deg)";
+          layer2.style.transform ="rotate(45deg)";
+          layer3.style.transform ="rotate(45deg)";
         }, 800);
 
 
@@ -98,7 +108,6 @@ function loadMusic(indxNum) {
   layer1.style.setProperty("background-repeat", `no-repeat`);
   layer2.style.setProperty("background-repeat", `no-repeat`);
   layer3.style.setProperty("background-repeat", `no-repeat`);
-  // myImg.src = `images/${allMusic[indxNum - 1].img}.jpg`;
   mainAudio.src = `songs/${allMusic[indxNum - 1].src}.mp3`;
 }
 
@@ -241,6 +250,28 @@ volumeBar.addEventListener("click", (e) => {
     mainAudio.volume=angleDeg;
     console.log(angleDeg);
 
+});
+let mini=document.getElementById("minimize");
+mini.addEventListener("click", ()=>{
+  
+});
+
+// let timerr=2000000000;
+// volumeBar.addEventListener("mouseover", () => {
+//   timerr=2000000000;
+//   volHide();
+// });
+
+// volumeBar.addEventListener("mouseout", () => {
+//   timerr=5000;  
+//   volHide();
+// });
+
+
+
+
+volumeBtn.addEventListener("click", () => {
+  volumeBar.classList.toggle("volumeshow");
 });
 
 // PlayList Display
