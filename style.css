@@ -66,6 +66,7 @@ body {
     font-weight: 600;
     font-size: 18px;
     color: var(--white);
+    user-select: none;
 }
 
 .img-area {
@@ -153,6 +154,7 @@ body {
 .song-details {
     margin-top: 10px;
     margin-left: 10px;
+    user-select: none;
 }
 
 .song-details p {
@@ -244,6 +246,7 @@ body {
     color: var(--white);
     font-size: 14px;
     margin-top: 2px;
+    user-select: none;
 }
 
 .plist {
